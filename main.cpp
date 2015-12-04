@@ -15,7 +15,7 @@ Prog p;
 
 void draw(void)   
 {
-
+	p.run();
 }
 
 int main ( int argc, char** argv )   // Create Main Function For Bringing It All Together

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "commands.h"
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -18,10 +20,9 @@ public:
 	friend istream & operator>>(istream & strm, Prog & prog);
 
 protected:
-	//vector<Node*> cmds;
+	vector<Node*> cmds;
 
 private:
 	
-	/*vector<node*> cmds;*/
 	
 };

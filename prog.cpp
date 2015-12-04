@@ -16,46 +16,49 @@ Prog::~Prog()
 }
 
 void Prog::run() {
-	cout << "Running with data: " << command << " : " << val << endl;
+
+	for (int i = 0; i < cmds.size(); i++) {
+		cmds[i]->run();
+	}
+	
+
 }
 
 istream & operator>>(istream & strm, Prog & prog)
 {
 	while (!strm.eof()) {
 
-		//strm >> prog.command >> ws >> prog.val >> ws;
-		//cout << prog.command << endl;
-		//cout << prog.val << endl;
-
 		strm >> prog.command >> ws;
 		if (prog.command == "FORWARD")
 		{
-			cout << "That was a forward of value: ";
-			strm >> prog.val >> ws;
-			cout << prog.val << endl;
-			//Forward* fwd = new Forward();
-			//prog.cmds.push_back(fwd);
+			Forward* fwd = new Forward();
+			cout << "This is a Forward" << endl;
+			strm >> (*fwd);
+			prog.cmds.push_back(fwd);
 		}
 		
 		if (prog.command == "LEFT" || prog.command == "Right")
 		{
-			cout << "That was a rotate of value: ";
-			strm >> prog.val >> ws;
-			cout << prog.val << endl;
-			//Rotate* rot = new Rotate();
-			//prog.cmds.push_back(rot);
+			Rotate* rot = new Rotate();
+			cout << "This is a Rotate" << endl;
+			strm >> (*rot);
+			prog.cmds.push_back(rot);
 		}
 
 		if (prog.command == "JUMP")
 		{
-			//Jump* jmp = new Jump();
-			//prog.cmds.push_back(jmp);
+			Jump* jmp = new Jump();
+			cout << "This is a Jump" << endl;
+			strm >> (*jmp);
+			prog.cmds.push_back(jmp);
 		}
 
 		if (prog.command == "REPEAT")
 		{
-			//Repeat* rpt = new Repeat();
-			//prog.cmds.push_back(rpt);
+			Repeat* rpt = new Repeat();
+			cout << "This is a Repeat" << endl;
+			strm >> (*rpt);
+			prog.cmds.push_back(rpt);
 		}
 
 	}
