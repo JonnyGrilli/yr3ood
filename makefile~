@@ -28,7 +28,7 @@ $(PROG): $(OBJ) prog.o
 	 $(CC) prog.o $(OBJ) -L$(GLLIBDIR) -L$(GLUTLIBDIR) -L$(GLXLIB) $(GLLIB) -o $(PROG)
 
 prog.o: prog.h prog.cpp
-	$(CC) -c prog.cpp
+	CC -c prog.cpp
 
 $(OBJ): $(SRC) prog.h prog.cpp
 	 $(CC) -I$(GLINCDIR) -I$(GLUTINCDIR) -c $(SRC)

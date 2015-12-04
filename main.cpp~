@@ -2,13 +2,16 @@
 //
 
 #include "window.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string>
 #include <iostream>
 #include <fstream>
 
+#include "prog.h"
+
 using namespace std;
+
+Prog p;
 
 void draw(void)   
 {
@@ -34,27 +37,25 @@ int main ( int argc, char** argv )   // Create Main Function For Bringing It All
 		exit(1);
 	}
 
-	string p;
+	
 
-	//Read the file's content
+	//Test read the file's content
+	/*string p;
 	while (!input.eof())
 	{
 		input >> p;
 		cout << p;
 		// content.push_back(p);
-	}
+	}*/
 
+	input >> p;
 	input.close();
 
-	float r, g, b;
-	cout << "Please enter a background colour" << endl;
+	float r(0.0f), g(0.0f), b(0.0f);
+	/*cout << "Please enter a background colour" << endl;
 	cout << "Enter valuse for red, green and blue component; e.g. 0.0 0.0 1.0 gives blue" << endl << endl;
-	cin >> r >> ws >> g >> ws >> b;
+	cin >> r >> ws >> g >> ws >> b;*/
 
 	window display(argc, argv, r, g, b);
-
-	getchar();
-
-	return 0;
 }
 
