@@ -24,19 +24,32 @@ PROG=$(PROGNAME)
 OBJ=$(PROGNAME).o
 SRC=$(PROGNAME).cpp
 
-$(PROG): $(OBJ) prog.o commands.o
+$(PROG): $(OBJ) prog.o node.o command.o forward.o rotate.o jump.o repeat.o
 	 $(CC) prog.o commands.o $(OBJ) -L$(GLLIBDIR) -L$(GLUTLIBDIR) -L$(GLXLIB) $(GLLIB) -o $(PROG)
 
-commands.o: commands.h commands.cpp
-	$(CC) -c commands.cpp
+node.o: node.h node.cpp
+	$(CC) -c node.cpp
+	
+command.o: command.h command.cpp node.h node.cpp
+	$(CC) -c command.cpp
+	
+forward.o: forward.h forward.cpp command.h command.cpp node.h node.cpp
+	$(CC) -c forward.cpp
+	
+rotate.o: rotate.h rotate.cpp command.h command.cpp node.h node.cpp
+	$(CC) -c rotate.cpp
+	
+jump.o: jump.h jump.cpp command.h command.cpp node.h node.cpp
+	$(CC) -c jump.cpp
+	
+repeat.o: repeat.h repeat.cpp command.h command.cpp node.h node.cpp
+	$(CC) -c repeat.cpp
 
-prog.o: prog.h prog.cpp commands.h commands.cpp
+prog.o: prog.h prog.cpp command.h command.cpp node.h node.cpp forward.h forward.cpp rotate.h rotate.cpp jump.h jump.cpp repeat.h repeat.cpp
 	$(CC) -c prog.cpp
 
-$(OBJ): $(SRC) prog.h prog.cpp commands.h commands.cpp
+$(OBJ): $(SRC) prog.h prog.cpp command.h command.cpp node.h node.cpp forward.h forward.cpp rotate.h rotate.cpp jump.h jump.cpp repeat.h repeat.cpp
 	 $(CC) -I$(GLINCDIR) -I$(GLUTINCDIR) -c $(SRC)
 
 clean: 
 	/bin/rm -rf $(OBJ) $(PROG)
-
-
