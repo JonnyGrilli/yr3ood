@@ -1,13 +1,16 @@
 #include "command.h"
+#include <istream>
+#include <iostream>
 
-class Rotate: public Command{
-public:
-		~Rotate();
-		Rotate(bool dir);
-		void run();
-		friend istream& operator>> (istream& in, Rotate& a);
-		bool dir;
-private:
-		Rotate(){};
-		
-};
+using namespace std;
+
+istream& operator>> (istream& in, Command& a)
+{
+	in >> a.value >> ws;
+	cout << a.value << endl;
+	return in;
+}
+
+float Command::getValue() {
+	return value;
+}
