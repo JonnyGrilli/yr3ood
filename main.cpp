@@ -6,7 +6,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-
 #include "prog.h"
 
 using namespace std;
@@ -37,7 +36,8 @@ int main ( int argc, char** argv )   // Create Main Function For Bringing It All
 		exit(1);
 	}
 
-	
+//	Repeat r;
+
 
 	//Test read the file's content
 	/*string p;
@@ -58,4 +58,3 @@ int main ( int argc, char** argv )   // Create Main Function For Bringing It All
 
 	window display(argc, argv, r, g, b);
 }
-
