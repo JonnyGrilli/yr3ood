@@ -1,4 +1,8 @@
 #include "prog.h"
+#include "forward.h"
+#include "rotate.h"
+#include "jump.h"
+#include "repeat.h"
 
 #include  <iostream>
 
@@ -12,15 +16,14 @@ Prog::Prog()
 
 Prog::~Prog()
 {
-	// Default Destructor
+	for (int i = 0; i < cmds.size(); i++) // Default Destructor
+		delete cmds[i];
 }
 
 void Prog::run() {
 
-	for (int i = 0; i < cmds.size(); i++) {
-		cmds[i]->run();
-	}
-	
+	for (int i = 0; i < cmds.size(); i++) 
+		cmds[i]->run();	
 
 }
 
@@ -29,6 +32,7 @@ istream & operator>>(istream & strm, Prog & prog)
 	while (!strm.eof()) {
 
 		strm >> prog.command >> ws;
+
 		if (prog.command == "FORWARD")
 		{
 			Forward* fwd = new Forward();
@@ -37,10 +41,12 @@ istream & operator>>(istream & strm, Prog & prog)
 			prog.cmds.push_back(fwd);
 		}
 		
-		if (prog.command == "LEFT" || prog.command == "Right")
+		if (prog.command == "LEFT" || prog.command == "RIGHT")
 		{
-			Rotate* rot = new Rotate();
-			cout << "This is a Rotate" << endl;
+			bool dir = true;
+			if(prog.command == "RIGHT")
+				dir = false;
+			Rotate* rot = new Rotate(dir);	
 			strm >> (*rot);
 			prog.cmds.push_back(rot);
 		}
@@ -59,6 +65,11 @@ istream & operator>>(istream & strm, Prog & prog)
 			cout << "This is a Repeat" << endl;
 			strm >> (*rpt);
 			prog.cmds.push_back(rpt);
+		}
+		
+		if (prog.command == "]")
+		{
+			break;
 		}
 
 	}
